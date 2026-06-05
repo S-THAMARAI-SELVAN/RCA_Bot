@@ -1,24 +1,19 @@
 import os
 
-# Create logs folder if not exists
+# Create logs folder if it doesn't exist
 os.makedirs("logs", exist_ok=True)
 
 errors = []
 
 required_files = [
     "index.html",
-    "about.html",
-    "contact.html",
-    "blog.html",
-    "discography.html",
-    "tours.html",
-    "videos.html"
+    "timer.html",
+    "templatemo-622-clearwave.css",
+    "templatemo-622-clearwave.js"
 ]
 
 required_folders = [
-    "css",
-    "js",
-    "img"
+    "images"
 ]
 
 # Check files
@@ -40,7 +35,10 @@ if errors:
         for error in errors:
             f.write(error + "\n")
 
-    print("Validation Failed")
+    print("Validation Failed\n")
+
+    for error in errors:
+        print(error)
 
     raise Exception("Website Validation Failed")
 
