@@ -1,0 +1,32 @@
+
+=================================================
+      CI/CD PIPELINE FAILURE RCA REPORT
+=================================================
+
+Generated Time:
+2026-06-06 01:45:49.899732
+
+
+Gemini Analysis Failed
+
+Reason:
+403 Permission denied: Consumer 'api_key:AIzaSyA85RfCX9b2kghHJ5mkunPEr-N5gEXHUx4' has been suspended. [reason: "CONSUMER_SUSPENDED"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+metadata {
+  key: "containerInfo"
+  value: "api_key:AIzaSyA85RfCX9b2kghHJ5mkunPEr-N5gEXHUx4"
+}
+metadata {
+  key: "consumer"
+  value: "projects/907711064546"
+}
+, locale: "en-US"
+message: "Permission denied: Consumer \'api_key:AIzaSyA85RfCX9b2kghHJ5mkunPEr-N5gEXHUx4\' has been suspended."
+]
+
+
+=================================================
