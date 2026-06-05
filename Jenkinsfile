@@ -12,7 +12,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'py RCA_Bot\\validator.py'
+                bat '"C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" RCA_Bot\\validator.py'
             }
         }
 
@@ -36,9 +36,9 @@ pipeline {
 
             echo 'Pipeline Failed - Running RCA Bot'
 
-            bat 'py RCA_Bot\\rca_agent.py'
+            bat '"C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" RCA_Bot\\rca_agent.py'
 
-            bat 'py RCA_Bot\\send_mail.py'
+            bat '"C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" RCA_Bot\\send_mail.py'
         }
     }
 }
