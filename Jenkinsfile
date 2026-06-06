@@ -16,46 +16,51 @@ pipeline {
                 '''
             }
         }
-stage('Deploy') {
-    steps {
-        bat '''
-        if not exist C:\\website mkdir C:\\website
-        xcopy /E /Y /I * C:\\website\\
 
-        cd /d %WORKSPACE%
+        stage('Deploy') {
+            steps {
+                bat '''
+                set GIT_TERMINAL_PROMPT=0
 
-        git config user.name "jenkins"
-        git config user.email "jenkins@local"
+                if not exist C:\\website mkdir C:\\website
+                xcopy /E /Y /I * C:\\website\\
 
-        echo ===== MAIN BRANCH =====
-        git checkout main
-        git pull origin main
+                cd /d %WORKSPACE%
 
-        git add .
+                git config user.name "jenkins"
+                git config user.email "jenkins@local"
 
-        git diff --cached --quiet
-        if %errorlevel%==0 (
-            echo No changes to commit
-        ) else (
-            git commit -m "Auto deploy commit from Jenkins"
-        )
+                echo ===== MAIN BRANCH =====
+                git checkout main
+                git pull origin main
 
-        git push origin main
+                git add .
 
-        echo ===== PRODUCTION DEPLOY =====
-        git checkout production || git checkout -b production
+                git diff --cached --quiet
+                if %errorlevel%==0 (
+                    echo No changes to commit
+                ) else (
+                    git commit -m "Auto deploy commit from Jenkins"
+                )
 
-        git merge main
+                echo Pushing MAIN...
+                git push origin main --progress
 
-        if errorlevel 1 (
-            echo MERGE FAILED - STOPPING PIPELINE
-            exit /b 1
-        )
+                echo ===== PRODUCTION DEPLOY =====
+                git checkout production || git checkout -b production
 
-        git push origin production
-        '''
-    }
-}
+                git merge main
+
+                if errorlevel 1 (
+                    echo MERGE FAILED - STOPPING PIPELINE
+                    exit /b 1
+                )
+
+                echo Pushing PRODUCTION...
+                git push origin production --progress
+                '''
+            }
+        }
     }
 
     post {

@@ -1,5 +1,7 @@
-logs/
 database/
-**pycache**/
+logs/
+__pycache__/
 *.pyc
+*.log
 *.db
+C:\\website/
