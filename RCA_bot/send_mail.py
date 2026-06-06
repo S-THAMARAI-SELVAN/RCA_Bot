@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 SENDER_EMAIL = "thamilprakasam2005@gmail.com"
 APP_PASSWORD = "safo uksx dqbu njdh"
 
-RECEIVER_EMAIL = "swathi@gmail.com"
+RECEIVER_EMAIL = "thamaraiselvansubbiah@gmail.com"
 
 try:
 
