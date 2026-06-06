@@ -52,7 +52,7 @@ pipeline {
     post {
 
         success {
-            echo 'Website deployed successfully to production'
+            echo 'Website deployed successfully to production...'
         }
 
         failure {
