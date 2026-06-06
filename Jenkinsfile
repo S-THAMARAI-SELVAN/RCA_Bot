@@ -16,8 +16,7 @@ pipeline {
                 '''
             }
         }
-
-       stage('Deploy') {
+stage('Deploy') {
     steps {
         bat '''
         if not exist C:\\website mkdir C:\\website
@@ -28,20 +27,30 @@ pipeline {
         git config user.name "jenkins"
         git config user.email "jenkins@local"
 
-        REM MAIN branch update
+        echo ===== MAIN BRANCH =====
         git checkout main
         git pull origin main
 
         git add .
 
-        git diff --cached --quiet || git commit -m "Auto deploy commit from Jenkins"
+        git diff --cached --quiet
+        if %errorlevel%==0 (
+            echo No changes to commit
+        ) else (
+            git commit -m "Auto deploy commit from Jenkins"
+        )
 
         git push origin main
 
-        REM ===== PRODUCTION DEPLOY =====
+        echo ===== PRODUCTION DEPLOY =====
         git checkout production || git checkout -b production
 
         git merge main
+
+        if errorlevel 1 (
+            echo MERGE FAILED - STOPPING PIPELINE
+            exit /b 1
+        )
 
         git push origin production
         '''
