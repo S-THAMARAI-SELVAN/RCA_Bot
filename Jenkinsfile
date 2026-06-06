@@ -19,28 +19,29 @@ pipeline {
                 bat '"C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" RCA_Bot\\validator.py'
             }
         }
-stage('Merge To Production') {
-    steps {
 
-        bat '''
-        git config --global user.name "Jenkins"
-        git config --global user.email "jenkins@example.com"
+        stage('Merge To Production') {
+            steps {
+                bat '''
+                git config --global user.name "Jenkins"
+                git config --global user.email "jenkins@example.com"
 
-        git config --global --add safe.directory "%CD%"
+                git config --global --add safe.directory "%WORKSPACE%"
 
-        git fetch origin
+                git checkout main
+                git pull origin main
 
-        git push origin origin/main:production --verbose
-        '''
-    }
-}
+                git push origin HEAD:production --verbose
+                '''
+            }
+        }
+
         stage('Deploy') {
             steps {
-
                 bat '''
                 if not exist C:\\website mkdir C:\\website
 
-                xcopy /E /I /Y * C:\\website\\
+                robocopy . C:\\website /MIR /XD .git
                 '''
             }
         }
@@ -53,7 +54,6 @@ stage('Merge To Production') {
         }
 
         failure {
-
             echo 'Pipeline Failed - Running RCA Bot'
 
             bat '"C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" RCA_Bot\\rca_agent.py'
