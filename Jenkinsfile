@@ -40,7 +40,7 @@ pipeline {
             '''
 
             bat '''
-            C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe RCA_Bot\\send_mail.py
+            C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe RCA_Bot\\send_discord_alert.py
             '''
         }
     }
