@@ -8,7 +8,7 @@ import google.generativeai as genai
 # ==========================================
 
 genai.configure(
-    api_key="AQ.Ab8RN6LhPtW701agkvoQYQ_UowlDB5JS36k0HOy2gOzjBsCgYg"
+    api_key="AQ.Ab8RN6Lek_L9gZDoUHsfVOhKjKzB05-vhH26nwWLy7p0VJB6eA"
 )
 
 model = genai.GenerativeModel(
