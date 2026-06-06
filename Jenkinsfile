@@ -1,5 +1,4 @@
 pipeline {
-
     agent any
 
     options {
@@ -16,39 +15,39 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat '"C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" RCA_Bot\\validator.py'
+                bat 'python RCA_Bot\\validator.py'
             }
         }
 
         stage('Merge To Production') {
             steps {
-                bat '''
-                git config --global user.name "Jenkins"
-                git config --global user.email "jenkins@example.com"
+                withCredentials([usernamePassword(credentialsId: 'github-creds',
+                                                  usernameVariable: 'S-THAMARAI-SELVAN',
+                                                  passwordVariable: 'mUDAIYAR00@')]) {
 
-                git config --global --add safe.directory "%WORKSPACE%"
+                    bat '''
+                        git config --global user.name "Jenkins"
+                        git config --global user.email "jenkins@example.com"
+                        git config --global --add safe.directory "%WORKSPACE%"
 
-                git checkout main
-                git pull origin main
-
-                git push origin HEAD:production --verbose
-                '''
+                        git remote set-url origin https://%GIT_USER%:%GIT_PASS%@github.com/S-THAMARAI-SELVAN/RCA_Bot.git
+                        git push origin HEAD:production --verbose
+                    '''
+                }
             }
         }
 
         stage('Deploy') {
             steps {
                 bat '''
-                if not exist C:\\website mkdir C:\\website
-
-                robocopy . C:\\website /MIR /XD .git
+                    if not exist C:\\website mkdir C:\\website
+                    robocopy . C:\\website /E /XD .git
                 '''
             }
         }
     }
 
     post {
-
         success {
             echo 'Website deployed successfully'
         }
@@ -56,9 +55,8 @@ pipeline {
         failure {
             echo 'Pipeline Failed - Running RCA Bot'
 
-            bat '"C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" RCA_Bot\\rca_agent.py'
-
-            bat '"C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" RCA_Bot\\send_discord_alert.py'
+            bat 'python RCA_Bot\\rca_agent.py'
+            bat 'python RCA_Bot\\send_discord_alert.py'
         }
 
         always {
