@@ -1,0 +1,5 @@
+logs/
+database/
+**pycache**/
+*.pyc
+*.db
