@@ -75,13 +75,9 @@ pipeline {
         failure {
             echo 'Pipeline Failed - Running RCA Bot'
 
-            bat '''
-            C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe RCA_Bot\\rca_agent.py
-            '''
+            bat '"C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" RCA_Bot\\rca_agent.py'
 
-            bat '''
-            C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe RCA_Bot\\send_discord_alert.py
-            '''
+            bat '"C:\\Users\\thama\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" RCA_Bot\\send_discord_alert.py'
         }
     }
 }
