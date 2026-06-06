@@ -18,51 +18,52 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                bat '''
-                set GIT_TERMINAL_PROMPT=0
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
 
-                if not exist C:\\website mkdir C:\\website
-                xcopy /E /Y /I * C:\\website\\
+            bat '''
+            set GIT_TERMINAL_PROMPT=0
 
-                cd /d %WORKSPACE%
+            if not exist C:\\website mkdir C:\\website
+            xcopy /E /Y /I * C:\\website\\
 
-                git config user.name "jenkins"
-                git config user.email "jenkins@local"
+            cd /d %WORKSPACE%
 
-                echo ===== MAIN BRANCH =====
-                git checkout main
-                git pull origin main
+            git config user.name "jenkins"
+            git config user.email "jenkins@local"
 
-                git add .
+            echo ===== MAIN BRANCH =====
+            git checkout main
+            git pull origin main
 
-                git diff --cached --quiet
-                if %errorlevel%==0 (
-                    echo No changes to commit
-                ) else (
-                    git commit -m "Auto deploy commit from Jenkins"
-                )
+            git add .
 
-                echo Pushing MAIN...
-               git push https://S-THAMARAI-SELVAN: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@github.com/S-THAMARAI-SELVAN/RCA_Bot.git main --progress
+            git diff --cached --quiet
+            if %errorlevel%==0 (
+                echo No changes to commit
+            ) else (
+                git commit -m "Auto deploy commit from Jenkins"
+            )
 
+            echo Pushing MAIN...
+            git push https://%GIT_USER%:%GIT_PASS%@github.com/S-THAMARAI-SELVAN/RCA_Bot.git main
 
+            echo ===== PRODUCTION DEPLOY =====
+            git checkout production || git checkout -b production
 
-                echo ===== PRODUCTION DEPLOY =====
-                git checkout production || git checkout -b production
+            git merge main
 
-                git merge main
+            if errorlevel 1 (
+                echo MERGE FAILED - STOPPING PIPELINE
+                exit /b 1
+            )
 
-                if errorlevel 1 (
-                    echo MERGE FAILED - STOPPING PIPELINE
-                    exit /b 1
-                )
-
-                echo Pushing PRODUCTION...
-               git push https://S-THAMARAI-SELVAN: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@github.com/S-THAMARAI-SELVAN/RCA_Bot.git production --progress
-                '''
-            }
+            echo Pushing PRODUCTION...
+            git push https://%GIT_USER%:%GIT_PASS%@github.com/S-THAMARAI-SELVAN/RCA_Bot.git production
+            '''
         }
+    }
+}
     }
 
     post {
