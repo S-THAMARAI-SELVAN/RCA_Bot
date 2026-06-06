@@ -44,7 +44,9 @@ pipeline {
                 )
 
                 echo Pushing MAIN...
-                git push origin main --progress
+               git push https://S-THAMARAI-SELVAN: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@github.com/S-THAMARAI-SELVAN/RCA_Bot.git main --progress
+
+
 
                 echo ===== PRODUCTION DEPLOY =====
                 git checkout production || git checkout -b production
@@ -57,7 +59,7 @@ pipeline {
                 )
 
                 echo Pushing PRODUCTION...
-                git push origin production --progress
+               git push https://S-THAMARAI-SELVAN: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@github.com/S-THAMARAI-SELVAN/RCA_Bot.git production --progress
                 '''
             }
         }
