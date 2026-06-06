@@ -17,41 +17,36 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                bat '''
-                if not exist C:\\website mkdir C:\\website
-                xcopy /E /Y /I * C:\\website\\
+       stage('Deploy') {
+    steps {
+        bat '''
+        if not exist C:\\website mkdir C:\\website
+        xcopy /E /Y /I * C:\\website\\
 
-                cd /d %WORKSPACE%
+        cd /d %WORKSPACE%
 
-                git config user.name "jenkins"
-                git config user.email "jenkins@local"
+        git config user.name "jenkins"
+        git config user.email "jenkins@local"
 
-                REM Ensure we are on main branch
-                git checkout main
+        REM MAIN branch update
+        git checkout main
+        git pull origin main
 
-                REM Pull latest changes to avoid conflicts
-                git pull origin main
+        git add .
 
-                REM Commit only if changes exist
-                git add .
-                git diff --cached --quiet || git commit -m "Auto deploy commit from Jenkins"
+        git diff --cached --quiet || git commit -m "Auto deploy commit from Jenkins"
 
-                REM Push main first
-                git push origin main
+        git push origin main
 
-                REM Switch to production
-                git checkout production
+        REM ===== PRODUCTION DEPLOY =====
+        git checkout production || git checkout -b production
 
-                REM Merge safely
-                git merge main
+        git merge main
 
-                REM Push production
-                git push origin production
-                '''
-            }
-        }
+        git push origin production
+        '''
+    }
+}
     }
 
     post {
