@@ -5,3 +5,11 @@ __pycache__/
 *.log
 *.db
 C:\\website/
+
+# Documentation Files
+README.md
+PRESENTATION.md
+TECHNICAL_REFERENCE.md
+QUICKSTART.md
+ONE_PAGE_SUMMARY.md
+DOCUMENTATION_INDEX.md
