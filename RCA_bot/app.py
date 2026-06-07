@@ -8,6 +8,11 @@ import plotly.graph_objects as go
 import plotly.express as px
 import warnings
 import asyncio
+import sys
+
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from db import create_table
 
 # Windows asyncio fix for Python 3.14
 warnings.filterwarnings("ignore", category=ResourceWarning)
@@ -16,6 +21,9 @@ if os.name == 'nt':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     except Exception:
         pass
+
+# Initialize database on startup
+create_table()
 
 # ==========================================
 # PAGE CONFIG
