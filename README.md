@@ -1,120 +1,385 @@
-# 🤖 RCA Bot - AI-Powered DevOps Troubleshooting Recommendation [![GitHub](https://img.shields.io/badge/GitHub-RCA_Bot-blue?logo=github)](https://github.com/S-THAMARAI-SELVAN/RCA_Bot) [![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)](https://www.python.org/) [![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD-red?logo=jenkins)](https://www.jenkins.io/) [![License](https://img.shields.io/badge/License-MIT-green)]() **Automated Root Cause Analysis system** for CI/CD pipeline failures using AI-powered log analysis, git diff comparison, and intelligent remediation suggestions. ## 🎯 What It Does When a Jenkins pipeline fails, RCA Bot automatically: - 📊 **Analyzes** failure logs + success logs + recent git commits - 🧠 **Generates** AI-powered root cause analysis using Llama3 - 📝 **Produces** professional RCA reports with remediation steps - 💾 **Stores** all analyses for historical trending - 🔔 **Alerts** team via Discord with key insights **Business Impact:** Reduce debugging time from hours to minutes • Enable faster incident resolution • Empower on-call engineers --- ## 🏗️ System Architecture
-mermaid
+# 🤖 RCA Bot - Pipeline failure RCA Bot
+
+[![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)](https://www.python.org/)
+[![Jenkins](https://img.shields.io/badge/Jenkins-CI/CD-red?logo=jenkins)](https://www.jenkins.io/)
+[![SQLite](https://img.shields.io/badge/Database-SQLite-green)]()
+[![Ollama](https://img.shields.io/badge/AI-Ollama-orange)]()
+[![License](https://img.shields.io/badge/License-MIT-brightgreen)]()
+
+---
+
+# 👨‍💻 Project Information
+
+### Team Name
+
+Team 28
+
+### Team Members
+
+* THAMARAI SELVAN S
+* SWATHI N 
+* SURUTHIKASA S
+
+### Resume
+
+* Resume Link: *
+THAMARAI SELVAN S - [Resume](https://drive.google.com/file/d/1dDDGZb7Q-20d4ixp5kIhoZYulch0hmt5/view?usp=sharing)
+SWATHI N - [Resume](https://drive.google.com/file/d/1C-oZ7moiKk6hxlwUpAWct8sJWXULlIYz/view?usp=sharing)
+SURUTHIKASA S - [Resume](https://drive.google.com/file/d/1lWouQ4UMoqCafnzaFKIweKdOhxNVz30d/view?usp=sharing)
+
+---
+
+# 🌐 Deliverable Links
+
+### 🔗 GitHub Repository
+
+https://github.com/S-THAMARAI-SELVAN/RCA_Bot
+
+### 🎥 Demo Video
+
+https://drive.google.com/file/d/1t4fXEJR15P_RxjVa94B-uyDiA61fAJce/view?usp=sharing
+
+### 🔔 Discord Channel
+
+Join the Discord server to view real-time pipeline failure alerts and AI-generated RCA recommendations.
+
+**Discord Link:** https://discord.gg/rvr6gyAt
+
+### 🚀 Deployment
+
+Local Deployment using Jenkins, Ollama (Llama 3), SQLite, and Discord Webhooks.
+
+
+# 📌 Project Overview
+
+RCA Bot (Root Cause Analysis Bot) is an AI-powered DevOps troubleshooting system that automatically analyzes CI/CD pipeline failures and generates intelligent Root Cause Analysis (RCA) reports.
+
+Instead of manually reading hundreds of lines of Jenkins logs, RCA Bot collects failure logs, compares them with previous successful runs, analyzes recent Git changes, and uses Llama 3 through Ollama to identify the most probable root cause and remediation steps.
+
+The generated RCA report is stored in SQLite and instantly shared with the team through Discord notifications.
+
+---
+
+# 🎯 Problem Statement
+
+CI/CD pipelines frequently fail due to:
+
+* Configuration issues
+* Code deployment errors
+* Dependency mismatches
+* Infrastructure problems
+* Environment variable changes
+
+Finding the exact root cause requires engineers to manually inspect logs, compare builds, and investigate recent commits.
+
+This process consumes significant engineering time and delays incident resolution.
+
+---
+
+# 💡 Solution
+
+RCA Bot automates the entire troubleshooting workflow.
+
+When a Jenkins pipeline fails:
+
+1. Collect Jenkins failure logs
+2. Retrieve previous successful execution logs
+3. Fetch latest Git changes
+4. Analyze all information using AI
+5. Generate Root Cause Analysis
+6. Store findings in SQLite
+7. Send Discord notifications
+
+This significantly reduces debugging effort and accelerates issue resolution.
+
+---
+
+# 🏗️ System Architecture
+
+```mermaid
 graph LR
-    A["Jenkins Pipeline"] -->|Failure| B["RCA Agent"]
-    B -->|Reads| C["Failure Logs"]
-    B -->|Reads| D["Success Logs"]
-    B -->|Executes| E["Git Diff"]
-    C & D & E -->|Multi-source<br/>Analysis| F["Ollama/Llama3"]
-    F -->|AI Processing| G["RCA Report"]
-    G -->|Stores| H["SQLite DB"]
-    H -->|Sends| I["Discord Alert"]
-    I -->|Notifies| J["Team"]
-    B -->|Validates| K["Website Files"]
-**Key Flow:** Pipeline Failure → Collect Data (3 sources) → AI Analysis → Report + Alert --- ## 🚀 Features | Feature | Description | |---------|-------------| | **Multi-Source Analysis** | Combines failure logs + success logs + git changes | | **AI-Powered** | Uses Llama3 via Ollama for intelligent reasoning | | **Automated Validation** | Pre-deployment website integrity checks | | **Historical Tracking** | SQLite persistence for trend analysis | | **Real-time Alerts** | Discord notifications for instant team awareness | | **Retry Recommendations** | Suggests fixes with confidence scoring | | **Git Integration** | Analyzes recent code changes for context | --- ## 🛠️ Tech Stack - **Language:** Python 3.8+ - **CI/CD:** Jenkins (pipeline orchestration) - **AI Engine:** Ollama + Llama3 (local LLM inference) - **Database:** SQLite3 (persistent storage) - **Notifications:** Discord Webhooks - **Version Control:** Git - **Validation:** BeautifulSoup4 (HTML parsing) --- ## 📁 Project Structure
-RCA_Bot/
-├── RCA_bot/
-│   ├── rca_agent.py           # Main orchestrator
-│   ├── db.py                  # Database operations
-│   ├── validator.py           # Pre-deployment checks
-│   └── send_discord_alert.py  # Notification system
-├── database/
-│   └── rca.db                 # SQLite persistence
-├── logs/
-│   ├── failure.log            # Jenkins failures
-│   ├── success.log            # Last successful run
-│   └── git_diff.log           # Code changes
-├── reports/
-│   └── rca_report.txt         # Latest analysis
-├── Jenkinsfile                # CI/CD pipeline
-└── README.md
---- ## 📊 Workflow Diagram
-mermaid
+
+A[Jenkins Pipeline Failure]
+--> B[RCA Agent]
+
+B --> C[Failure Logs]
+B --> D[Success Logs]
+B --> E[Git Diff Analysis]
+
+C --> F[Ollama Llama3]
+D --> F
+E --> F
+
+F --> G[RCA Report]
+
+G --> H[SQLite Database]
+
+H --> I[Discord Alert]
+
+I --> J[DevOps Team]
+```
+
+---
+
+# 🔄 Workflow
+
+```mermaid
 sequenceDiagram
-    participant J as Jenkins
-    participant A as RCA Agent
-    participant O as Ollama
-    participant D as Database
-    participant DC as Discord
-    
-    J->>A: Pipeline Failed!
-    A->>A: Read failure log
-    A->>A: Read success log
-    A->>A: Execute git diff
-    A->>O: Send analysis request
-    O->>O: Process with Llama3
-    O->>A: Return analysis
-    A->>D: Save to SQLite
-    A->>DC: Send alert
-    DC->>DC: Notify team
---- ## ⚡ Quick Start ### Prerequisites
-bash
-# Core requirements
-- Python 3.8+
-- Jenkins (with git)
-- Ollama (with Llama3 model)
-- Discord server & webhook URL
-### Installation 1. **Clone Repository**
-bash
-   git clone https://github.com/S-THAMARAI-SELVAN/RCA_Bot.git
-   cd RCA_Bot
-2. **Install Python Dependencies**
-bash
-   pip install requests beautifulsoup4 ollama
-3. **Verify Ollama Setup**
-bash
-   # Ensure Ollama running on localhost:11434
-   ollama pull llama3
-   curl http://localhost:11434/api/tags
-4. **Configure Discord Webhook** - Create webhook in Discord server settings - Update webhook URL in RCA_bot/send_discord_alert.py 5. **Set Up Jenkins Integration** - Add repository to Jenkins - Configure Jenkinsfile - Add post-failure trigger:
-groovy
-     post {
-         failure {
-             bat 'python RCA_bot/rca_agent.py'
-             bat 'python RCA_bot/send_discord_alert.py'
-         }
-     }
---- ## 📖 Usage ### Automated (Jenkins) RCA Bot runs automatically on pipeline failures and alerts team via Discord. ### Manual Execution
-bash
-# Run complete analysis
-python RCA_bot/rca_agent.py
 
-# Send alert
-python RCA_bot/send_discord_alert.py
+participant Jenkins
+participant RCA
+participant Ollama
+participant Database
+participant Discord
 
-# Validate website
+Jenkins->>RCA: Pipeline Failure
+
+RCA->>RCA: Read Failure Logs
+
+RCA->>RCA: Read Success Logs
+
+RCA->>RCA: Fetch Git Diff
+
+RCA->>Ollama: Analyze Data
+
+Ollama->>RCA: RCA Report
+
+RCA->>Database: Save Report
+
+RCA->>Discord: Send Alert
+
+Discord->>Team: Notify Team
+```
+
+---
+
+# 🚀 Features
+
+### Automated Failure Analysis
+
+Automatically detects Jenkins pipeline failures.
+
+### Multi-Source Investigation
+
+Uses:
+
+* Failure Logs
+* Success Logs
+* Git Diff
+
+for comprehensive analysis.
+
+### AI-Powered RCA
+
+Uses Ollama + Llama3 to generate root cause explanations.
+
+### Historical Tracking
+
+Stores all failures and reports in SQLite.
+
+### Discord Notifications
+
+Instantly alerts the DevOps team.
+
+### Website Validation
+
+Validates HTML, CSS, JavaScript, images, and links before deployment.
+
+### Actionable Recommendations
+
+Provides remediation steps and retry suggestions.
+
+---
+
+# 🛠️ Technology Stack
+
+| Layer                | Technology       |
+| -------------------- | ---------------- |
+| Programming Language | Python           |
+| CI/CD                | Jenkins          |
+| AI Engine            | Ollama + Llama3  |
+| Database             | SQLite           |
+| Notifications        | Discord Webhooks |
+| Version Control      | Git              |
+| Validation           | BeautifulSoup    |
+
+---
+
+# 📂 Project Structure
+
+```text
+RCA_Bot/
+
+├── RCA_bot/
+│   ├── rca_agent.py
+│   ├── validator.py
+│   ├── db.py
+│   └── send_discord_alert.py
+
+├── database/
+│   └── rca.db
+
+├── logs/
+│   ├── failure.log
+│   ├── success.log
+│   └── git_diff.log
+
+├── reports/
+│   └── rca_report.txt
+
+├── Jenkinsfile
+
+└── README.md
+```
+
+---
+
+# ⚙️ Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/S-THAMARAI-SELVAN/RCA_Bot.git
+
+cd RCA_Bot
+```
+
+## Install Dependencies
+
+```bash
+pip install requests
+
+pip install beautifulsoup4
+
+pip install ollama
+```
+
+## Install Ollama
+
+```bash
+ollama pull llama3
+```
+
+Verify installation:
+
+```bash
+ollama list
+```
+
+---
+
+# ▶️ Running the Project
+
+## Run Validator
+
+```bash
 python RCA_bot/validator.py
-### Query Historical Data
-python
-import sqlite3
+```
 
-conn = sqlite3.connect("database/rca.db")
-cursor = conn.cursor()
-cursor.execute("SELECT timestamp, rca_report FROM pipeline_failures ORDER BY id DESC LIMIT 5")
-for row in cursor.fetchall():
-    print(f"{row[0]}: {row[1]}\n")
---- ## 🔍 Sample RCA Output
+## Run RCA Analysis
+
+```bash
+python RCA_bot/rca_agent.py
+```
+
+## Send Discord Alert
+
+```bash
+python RCA_bot/send_discord_alert.py
+```
+
+---
+
+# 📊 Sample RCA Output
+
+```text
 ROOT CAUSE ANALYSIS REPORT
-Generated: 2024-06-06 10:35:22
 
-FAILURE SUMMARY:
-Database connection failed during deployment
+Failure Summary:
+Deployment failed due to missing environment variable.
 
-ROOT CAUSE:
-Recent commit changed DB_PASSWORD environment variable, but 
-deployment script uses old configuration.
+Root Cause:
+Recent Git commit modified deployment configuration
+without updating environment variables.
 
-IMPACT:
-- Deploy stage failed
-- Website unavailable for 12 minutes
-- Affected: Production environment
+Impact:
+Production deployment blocked.
 
-RECOMMENDATIONS:
-1. Update environment variables in deployment config
-2. Add environment variable validation step
-3. Review credential management process
+Recommendations:
+1. Update environment configuration.
+2. Validate deployment variables before release.
+3. Add configuration validation stage.
 
-RETRY SUGGESTION:
-✓ Run with updated environment variables
-Confidence Score: 94%
---- ## 🎓 Learning Outcomes This project demonstrates: - ✅ **DevOps Automation** - Jenkins pipeline integration - ✅ **AI Integration** - Local LLM for intelligent analysis - ✅ **Database Design** - SQLite schema for analytics - ✅ **System Architecture** - Multi-component orchestration - ✅ **Python Excellence** - Production-grade scripting - ✅ **Problem Solving** - Intelligent automation for complex problems --- ## 🚧 Future Enhancements - [ ] Web dashboard for RCA history visualization - [ ] Slack/Teams integration alongside Discord - [ ] ML-based failure prediction - [ ] Advanced metrics & trending dashboard - [ ] Email notifications for critical failures - [ ] Custom AI prompts per team - [ ] PagerDuty integration for on-call alerts - [ ] Automated remediation actions --- ## 💼 For Recruiters & Interviewers **Key Technical Achievements:** 1. **Multi-threaded Analysis** - Parallel log processing 2. **LLM Integration** - Localhost Ollama for cost-effective AI 3. **Event-Driven Architecture** - Jenkins webhooks trigger RCA 4. **Data Persistence** - SQLite for historical trending 5. **System Design** - Modular, maintainable Python code 6. **Automation** - Reduces debugging from hours to minutes **Business Value:**Reduces manual log analysis effort and accelerates CI/CD failure troubleshooting. --- ## 📚 Resources - [Ollama Documentation](https://ollama.ai) - [Llama3 Model](https://ollama.ai/library/llama3) - [Discord Webhooks](https://discord.com/developers/docs/resources/webhook) - [Jenkins CI/CD](https://www.jenkins.io/doc/) --- ## 📝 License MIT License - Feel free to fork and adapt for your organization --- ## 👨‍💻 About Built as an end-to-end DevOps solution demonstrating modern cloud automation, AI integration, and intelligent system design. **Questions?** Open an issue or reach out on GitHub!
+Confidence Score:
+94%
+```
+
+---
+
+# 🧠 Key Learning Outcomes
+
+* DevOps Automation
+* Jenkins CI/CD Integration
+* AI-Powered Troubleshooting
+* Local LLM Deployment
+* Database Design
+* Incident Management
+* Root Cause Analysis
+* Python Automation
+
+---
+
+# 📈 Future Enhancements
+
+* Slack Integration
+* Microsoft Teams Integration
+* Dashboard for Historical Reports
+* Predictive Failure Detection
+* Automated Remediation Actions
+* Email Notifications
+* Advanced Analytics
+
+---
+
+# 💼 Business Impact
+
+* Reduces manual log investigation effort
+* Accelerates CI/CD troubleshooting
+* Improves DevOps productivity
+* Enables faster incident resolution
+* Provides historical RCA tracking
+
+---
+
+# 📸 Screenshots
+
+### Jenkins Pipeline Failure
+
+![Jenkins Failure](img/jenkins/image1.png)
+
+### Jenkins Console Output
+
+![Jenkins Console](img/jenkins/image2.png)
+
+### Generated RCA Report
+
+![RCA Report](img/sql_report/img/image.png)
+
+### Discord Alert
+
+![Discord Alert](img/discord/img/image.png)
+
+---
+
+
+
+# 👨‍💻 Author
+
+THAMARAI SELVAN S
+SWATHI N
+
+GitHub:
+https://github.com/S-THAMARAI-SELVAN
+
+Project:
+RCA Bot – AI-Powered Root Cause Analysis for CI/CD Failures
