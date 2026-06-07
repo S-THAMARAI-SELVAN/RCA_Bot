@@ -20,14 +20,13 @@ Team 28
 * SWATHI N 
 * SURUTHIKASA S
 
-### Resume
+## Resume
 
-* Resume Link: *
-THAMARAI SELVAN S - [Resume](https://drive.google.com/file/d/1dDDGZb7Q-20d4ixp5kIhoZYulch0hmt5/view?usp=sharing)
-SWATHI N - [Resume](https://drive.google.com/file/d/1C-oZ7moiKk6hxlwUpAWct8sJWXULlIYz/view?usp=sharing)
-SURUTHIKASA S - [Resume](https://drive.google.com/file/d/1lWouQ4UMoqCafnzaFKIweKdOhxNVz30d/view?usp=sharing)
+- **THAMARAI SELVAN S** – [Resume](https://drive.google.com/file/d/1dDDGZb7Q-20d4ixp5kIhoZYulch0hmt5/view?usp=sharing)
 
----
+- **SWATHI N** – [Resume](https://drive.google.com/file/d/1C-oZ7moiKk6hxlwUpAWct8sJWXULlIYz/view?usp=sharing)
+
+- **SURUTHIKASA S** – [Resume](https://drive.google.com/file/d/1lWouQ4UMoqCafnzaFKIweKdOhxNVz30d/view?usp=sharing)
 
 # 🌐 Deliverable Links
 
@@ -45,7 +44,7 @@ Join the Discord server to view real-time pipeline failure alerts and AI-generat
 
 **Discord Link:** https://discord.gg/rvr6gyAt
 
-### 🚀 Deployment
+### ◆ Deployment
 
 Local Deployment using Jenkins, Ollama (Llama 3), SQLite, and Discord Webhooks.
 
@@ -94,7 +93,7 @@ This significantly reduces debugging effort and accelerates issue resolution.
 
 ---
 
-# 🏗️ System Architecture
+# ◆ System Architecture
 
 ```mermaid
 graph LR
@@ -119,41 +118,8 @@ H --> I[Discord Alert]
 I --> J[DevOps Team]
 ```
 
----
 
-# 🔄 Workflow
-
-```mermaid
-sequenceDiagram
-
-participant Jenkins
-participant RCA
-participant Ollama
-participant Database
-participant Discord
-
-Jenkins->>RCA: Pipeline Failure
-
-RCA->>RCA: Read Failure Logs
-
-RCA->>RCA: Read Success Logs
-
-RCA->>RCA: Fetch Git Diff
-
-RCA->>Ollama: Analyze Data
-
-Ollama->>RCA: RCA Report
-
-RCA->>Database: Save Report
-
-RCA->>Discord: Send Alert
-
-Discord->>Team: Notify Team
-```
-
----
-
-# 🚀 Features
+# ◆ Features
 
 ### Automated Failure Analysis
 
@@ -191,7 +157,7 @@ Provides remediation steps and retry suggestions.
 
 ---
 
-# 🛠️ Technology Stack
+# ◆ Technology Stack
 
 | Layer                | Technology       |
 | -------------------- | ---------------- |
@@ -231,10 +197,43 @@ RCA_Bot/
 
 └── README.md
 ```
+---
+
+# ◆ Workflow
+
+```mermaid
+sequenceDiagram
+
+participant Jenkins
+participant RCA
+participant Ollama
+participant Database
+participant Discord
+
+Jenkins->>RCA: Pipeline Failure
+
+RCA->>RCA: Read Failure Logs
+
+RCA->>RCA: Read Success Logs
+
+RCA->>RCA: Fetch Git Diff
+
+RCA->>Ollama: Analyze Data
+
+Ollama->>RCA: RCA Report
+
+RCA->>Database: Save Report
+
+RCA->>Discord: Send Alert
+
+Discord->>Team: Notify Team
+```
 
 ---
 
-# ⚙️ Installation
+---
+
+# ◆ Installation
 
 ## Clone Repository
 
@@ -373,10 +372,10 @@ Confidence Score:
 
 
 
-# 👨‍💻 Author
+# 👨‍💻 Authors
 
-THAMARAI SELVAN S
-SWATHI N
+- THAMARAI SELVAN S
+- SWATHI N
 
 GitHub:
 https://github.com/S-THAMARAI-SELVAN
