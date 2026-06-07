@@ -28,28 +28,24 @@ Team 28
 
 - **SURUTHIKASA S** – [Resume](https://drive.google.com/file/d/1lWouQ4UMoqCafnzaFKIweKdOhxNVz30d/view?usp=sharing)
 
-# 🌐 Deliverable Links
+## Deliverable Links
 
-### 🔗 GitHub Repository
-
+### GitHub Repository
 https://github.com/S-THAMARAI-SELVAN/RCA_Bot
 
-### 🎥 Demo Video
-
+### Demo Video
 https://drive.google.com/file/d/1t4fXEJR15P_RxjVa94B-uyDiA61fAJce/view?usp=sharing
 
-### 🔔 Discord Channel
+### Discord Channel
+Real-time pipeline failure alerts and AI-generated RCA recommendations.
 
-Join the Discord server to view real-time pipeline failure alerts and AI-generated RCA recommendations.
+Discord Invite:
+https://discord.gg/rvr6gyAt
 
-**Discord Link:** https://discord.gg/rvr6gyAt
+### Deployment
+Local deployment using Jenkins, Ollama (Llama 3), SQLite, and Discord Webhooks.
 
-### ◆ Deployment
-
-Local Deployment using Jenkins, Ollama (Llama 3), SQLite, and Discord Webhooks.
-
-
-# 📌 Project Overview
+# ◆ Project Overview
 
 RCA Bot (Root Cause Analysis Bot) is an AI-powered DevOps troubleshooting system that automatically analyzes CI/CD pipeline failures and generates intelligent Root Cause Analysis (RCA) reports.
 
@@ -59,7 +55,7 @@ The generated RCA report is stored in SQLite and instantly shared with the team 
 
 ---
 
-# 🎯 Problem Statement
+# ◆ Problem Statement
 
 CI/CD pipelines frequently fail due to:
 
@@ -75,7 +71,7 @@ This process consumes significant engineering time and delays incident resolutio
 
 ---
 
-# 💡 Solution
+# ◆ Solution
 
 RCA Bot automates the entire troubleshooting workflow.
 
@@ -267,7 +263,7 @@ ollama list
 
 ---
 
-# ▶ Running the Project
+# ▶︎ Running the Project
 
 ## Run Validator
 
