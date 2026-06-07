@@ -267,7 +267,7 @@ ollama list
 
 ---
 
-# ▶️ Running the Project
+# ▶ Running the Project
 
 ## Run Validator
 
@@ -289,7 +289,7 @@ python RCA_bot/send_discord_alert.py
 
 ---
 
-# 📊 Sample RCA Output
+# ◆ Sample RCA Output
 
 ```text
 ROOT CAUSE ANALYSIS REPORT
@@ -315,7 +315,7 @@ Confidence Score:
 
 ---
 
-# 🧠 Key Learning Outcomes
+# ◆ Key Learning Outcomes
 
 * DevOps Automation
 * Jenkins CI/CD Integration
@@ -328,7 +328,7 @@ Confidence Score:
 
 ---
 
-# 📈 Future Enhancements
+# ◆ Future Enhancements
 
 * Slack Integration
 * Microsoft Teams Integration
@@ -340,7 +340,7 @@ Confidence Score:
 
 ---
 
-# 💼 Business Impact
+# ◆ Business Impact
 
 * Reduces manual log investigation effort
 * Accelerates CI/CD troubleshooting
