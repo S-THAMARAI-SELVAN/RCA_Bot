@@ -1,0 +1,785 @@
+================================================================================
+                    VALIDATOR TEST CASES DOCUMENT
+                   RCA Bot Website Validation Module
+================================================================================
+
+Test Suite: validator.py Test Cases
+Purpose: Validate HTML files, CSS links, JavaScript links, images, and hyperlinks
+Status: Ready for Testing
+Date: June 8, 2026
+
+================================================================================
+                          TEST CASE CATEGORIES
+================================================================================
+
+1. Required Files Validation
+2. Required Folders Validation
+3. Image Validation
+4. CSS Link Validation
+5. JavaScript Link Validation
+6. Hyperlink Validation
+7. Error Logging
+8. Success Logging
+9. Edge Cases
+10. Integration Tests
+
+
+================================================================================
+                    CATEGORY 1: REQUIRED FILES VALIDATION
+================================================================================
+
+TEST CASE 1.1: All Required Files Present
+├─ Test ID: TC-RF-001
+├─ Description: Verify all required files exist (index.html, timer.html, CSS, JS)
+├─ Precondition: All 4 required files exist in project root
+├─ Steps:
+│   1. Run validator.py
+│   2. Check for missing file errors
+├─ Expected Result: No errors for missing files
+├─ Status: PASS/FAIL
+
+
+TEST CASE 1.2: Missing index.html
+├─ Test ID: TC-RF-002
+├─ Description: Detect missing index.html
+├─ Precondition: index.html does not exist
+├─ Steps:
+│   1. Delete/rename index.html
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Error "Missing file: index.html"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 1.3: Missing timer.html
+├─ Test ID: TC-RF-003
+├─ Description: Detect missing timer.html
+├─ Precondition: timer.html does not exist
+├─ Steps:
+│   1. Delete/rename timer.html
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Error "Missing file: timer.html"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 1.4: Missing CSS File
+├─ Test ID: TC-RF-004
+├─ Description: Detect missing CSS file
+├─ Precondition: templatemo-622-clearwave.css does not exist
+├─ Steps:
+│   1. Delete CSS file
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Error "Missing file: templatemo-622-clearwave.css"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 1.5: Missing JavaScript File
+├─ Test ID: TC-RF-005
+├─ Description: Detect missing JavaScript file
+├─ Precondition: templatemo-622-clearwave.js does not exist
+├─ Steps:
+│   1. Delete JS file
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Error "Missing file: templatemo-622-clearwave.js"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 1.6: Multiple Missing Files
+├─ Test ID: TC-RF-006
+├─ Description: Detect multiple missing files at once
+├─ Precondition: 2+ required files missing
+├─ Steps:
+│   1. Delete/rename CSS and JS files
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Multiple error entries for missing files
+├─ Status: PASS/FAIL
+
+
+================================================================================
+                   CATEGORY 2: REQUIRED FOLDERS VALIDATION
+================================================================================
+
+TEST CASE 2.1: Images Folder Exists
+├─ Test ID: TC-FD-001
+├─ Description: Verify required 'images' folder exists
+├─ Precondition: images folder exists
+├─ Steps:
+│   1. Run validator.py
+│   2. Check for missing folder errors
+├─ Expected Result: No error for missing 'images' folder
+├─ Status: PASS/FAIL
+
+
+TEST CASE 2.2: Missing Images Folder
+├─ Test ID: TC-FD-002
+├─ Description: Detect missing images folder
+├─ Precondition: images folder does not exist
+├─ Steps:
+│   1. Delete/rename images folder
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Error "Missing folder: images"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 2.3: Empty Images Folder
+├─ Test ID: TC-FD-003
+├─ Description: Validate empty images folder is acceptable
+├─ Precondition: images folder exists but is empty
+├─ Steps:
+│   1. Delete all images from folder but keep folder
+│   2. Run validator.py
+│   3. Check results
+├─ Expected Result: Folder is accepted (if images are externally hosted)
+├─ Status: PASS/FAIL
+
+
+================================================================================
+                      CATEGORY 3: IMAGE VALIDATION
+================================================================================
+
+TEST CASE 3.1: Valid Image References
+├─ Test ID: TC-IMG-001
+├─ Description: Verify valid image references with alt text
+├─ Precondition: HTML contains <img src="images/pic.jpg" alt="Description">
+├─ Steps:
+│   1. Add valid image reference to HTML
+│   2. Ensure image file exists
+│   3. Run validator.py
+├─ Expected Result: No image validation errors
+├─ Status: PASS/FAIL
+
+
+TEST CASE 3.2: Missing Image Alt Text
+├─ Test ID: TC-IMG-002
+├─ Description: Detect images missing alt attribute
+├─ Precondition: HTML contains <img src="pic.jpg"> without alt
+├─ Steps:
+│   1. Add image tag without alt attribute
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Error "Image missing alt text -> pic.jpg"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 3.3: Multiple Images Missing Alt
+├─ Test ID: TC-IMG-003
+├─ Description: Detect multiple images without alt text
+├─ Precondition: HTML contains 3+ images without alt attributes
+├─ Steps:
+│   1. Add multiple images without alt
+│   2. Run validator.py
+│   3. Check error count
+├─ Expected Result: Multiple errors for each image
+├─ Status: PASS/FAIL
+
+
+TEST CASE 3.4: Missing Image File
+├─ Test ID: TC-IMG-004
+├─ Description: Detect referenced image that doesn't exist
+├─ Precondition: HTML references <img src="images/missing.jpg" alt="pic">
+├─ Steps:
+│   1. Add image reference to non-existent file
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Error "Missing image -> images/missing.jpg"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 3.5: External Image URL
+├─ Test ID: TC-IMG-005
+├─ Description: Validate external image URLs are not checked locally
+├─ Precondition: HTML contains <img src="https://example.com/pic.jpg" alt="pic">
+├─ Steps:
+│   1. Add external image URL
+│   2. Run validator.py
+│   3. Check for local file check
+├─ Expected Result: No error for external URL
+├─ Status: PASS/FAIL
+
+
+TEST CASE 3.6: Image with Empty Alt Text
+├─ Test ID: TC-IMG-006
+├─ Description: Validate image with alt="" is detected
+├─ Precondition: HTML contains <img src="pic.jpg" alt="">
+├─ Steps:
+│   1. Add image with empty alt attribute
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Should detect empty alt or treat as provided
+├─ Status: PASS/FAIL
+
+
+TEST CASE 3.7: Image with Special Characters in Alt
+├─ Test ID: TC-IMG-007
+├─ Description: Validate alt text with special characters
+├─ Precondition: HTML contains <img src="pic.jpg" alt="Test & Demo">
+├─ Steps:
+│   1. Add image with special char alt text
+│   2. Run validator.py
+├─ Expected Result: No validation errors
+├─ Status: PASS/FAIL
+
+
+TEST CASE 3.8: All Image Validations Passed
+├─ Test ID: TC-IMG-008
+├─ Description: Verify all images have proper alt text and files exist
+├─ Precondition: All images valid with alt, files exist
+├─ Steps:
+│   1. Ensure all images are valid
+│   2. Run validator.py
+├─ Expected Result: No image-related errors
+├─ Status: PASS/FAIL
+
+
+================================================================================
+                     CATEGORY 4: CSS LINK VALIDATION
+================================================================================
+
+TEST CASE 4.1: Valid CSS Link
+├─ Test ID: TC-CSS-001
+├─ Description: Verify valid CSS link validation
+├─ Precondition: <link rel="stylesheet" href="templatemo-622-clearwave.css">
+├─ Steps:
+│   1. Add CSS link to HTML
+│   2. Ensure CSS file exists
+│   3. Run validator.py
+├─ Expected Result: No CSS validation errors
+├─ Status: PASS/FAIL
+
+
+TEST CASE 4.2: Missing CSS File
+├─ Test ID: TC-CSS-002
+├─ Description: Detect CSS file referenced but not found
+├─ Precondition: CSS link references non-existent file
+├─ Steps:
+│   1. Add CSS link to non-existent file
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Error "Missing CSS -> filename.css"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 4.3: External CSS URL
+├─ Test ID: TC-CSS-003
+├─ Description: Validate external CSS URLs are not checked locally
+├─ Precondition: <link href="https://cdn.example.com/style.css">
+├─ Steps:
+│   1. Add external CSS URL
+│   2. Run validator.py
+├─ Expected Result: No error for external URL
+├─ Status: PASS/FAIL
+
+
+TEST CASE 4.4: Multiple CSS Links
+├─ Test ID: TC-CSS-004
+├─ Description: Validate multiple CSS file links
+├─ Precondition: HTML links to 2+ CSS files
+├─ Steps:
+│   1. Add multiple CSS links
+│   2. Run validator.py
+├─ Expected Result: All CSS files validated
+├─ Status: PASS/FAIL
+
+
+TEST CASE 4.5: CSS Link in Different Path
+├─ Test ID: TC-CSS-005
+├─ Description: Validate CSS in subdirectory path
+├─ Precondition: <link href="css/style.css">
+├─ Steps:
+│   1. Add CSS link with path
+│   2. Ensure file exists at path
+│   3. Run validator.py
+├─ Expected Result: No validation error
+├─ Status: PASS/FAIL
+
+
+TEST CASE 4.6: Missing CSS with Path
+├─ Test ID: TC-CSS-006
+├─ Description: Detect missing CSS in subdirectory
+├─ Precondition: <link href="css/missing.css"> - file doesn't exist
+├─ Steps:
+│   1. Add CSS link to non-existent path
+│   2. Run validator.py
+├─ Expected Result: Error "Missing CSS -> css/missing.css"
+├─ Status: PASS/FAIL
+
+
+================================================================================
+                  CATEGORY 5: JAVASCRIPT LINK VALIDATION
+================================================================================
+
+TEST CASE 5.1: Valid JavaScript Link
+├─ Test ID: TC-JS-001
+├─ Description: Verify valid JS link validation
+├─ Precondition: <script src="templatemo-622-clearwave.js"></script>
+├─ Steps:
+│   1. Add JS link to HTML
+│   2. Ensure JS file exists
+│   3. Run validator.py
+├─ Expected Result: No JS validation errors
+├─ Status: PASS/FAIL
+
+
+TEST CASE 5.2: Missing JavaScript File
+├─ Test ID: TC-JS-002
+├─ Description: Detect JS file referenced but not found
+├─ Precondition: JS link references non-existent file
+├─ Steps:
+│   1. Add JS link to non-existent file
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Error "Missing JS -> filename.js"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 5.3: External JavaScript URL
+├─ Test ID: TC-JS-003
+├─ Description: Validate external JS URLs are not checked locally
+├─ Precondition: <script src="https://cdn.example.com/script.js"></script>
+├─ Steps:
+│   1. Add external JS URL
+│   2. Run validator.py
+├─ Expected Result: No error for external URL
+├─ Status: PASS/FAIL
+
+
+TEST CASE 5.4: Multiple JavaScript Links
+├─ Test ID: TC-JS-004
+├─ Description: Validate multiple JS file links
+├─ Precondition: HTML links to 2+ JS files
+├─ Steps:
+│   1. Add multiple JS links
+│   2. Run validator.py
+├─ Expected Result: All JS files validated
+├─ Status: PASS/FAIL
+
+
+TEST CASE 5.5: JavaScript in Different Path
+├─ Test ID: TC-JS-005
+├─ Description: Validate JS in subdirectory path
+├─ Precondition: <script src="js/main.js"></script>
+├─ Steps:
+│   1. Add JS link with path
+│   2. Ensure file exists at path
+│   3. Run validator.py
+├─ Expected Result: No validation error
+├─ Status: PASS/FAIL
+
+
+TEST CASE 5.6: Inline JavaScript
+├─ Test ID: TC-JS-006
+├─ Description: Validate inline JS doesn't trigger errors
+├─ Precondition: <script>console.log("test");</script>
+├─ Steps:
+│   1. Add inline JS to HTML
+│   2. Run validator.py
+├─ Expected Result: No error for inline JS
+├─ Status: PASS/FAIL
+
+
+================================================================================
+                    CATEGORY 6: HYPERLINK VALIDATION
+================================================================================
+
+TEST CASE 6.1: Valid Internal Link
+├─ Test ID: TC-LINK-001
+├─ Description: Verify valid internal hyperlinks
+├─ Precondition: <a href="page.html">Link</a> - file exists
+├─ Steps:
+│   1. Add internal link to existing HTML file
+│   2. Run validator.py
+├─ Expected Result: No link validation errors
+├─ Status: PASS/FAIL
+
+
+TEST CASE 6.2: Broken Internal Link
+├─ Test ID: TC-LINK-002
+├─ Description: Detect broken internal links
+├─ Precondition: <a href="missing.html">Link</a> - file doesn't exist
+├─ Steps:
+│   1. Add link to non-existent file
+│   2. Run validator.py
+│   3. Check error log
+├─ Expected Result: Error "Broken Link -> missing.html"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 6.3: Anchor Links
+├─ Test ID: TC-LINK-003
+├─ Description: Validate anchor links are not checked as broken
+├─ Precondition: <a href="#section">Link</a>
+├─ Steps:
+│   1. Add anchor link
+│   2. Run validator.py
+├─ Expected Result: No error for anchor links
+├─ Status: PASS/FAIL
+
+
+TEST CASE 6.4: External Links
+├─ Test ID: TC-LINK-004
+├─ Description: Validate external links are not checked locally
+├─ Precondition: <a href="https://example.com">Link</a>
+├─ Steps:
+│   1. Add external link
+│   2. Run validator.py
+├─ Expected Result: No error for external links
+├─ Status: PASS/FAIL
+
+
+TEST CASE 6.5: Email Links
+├─ Test ID: TC-LINK-005
+├─ Description: Validate mailto links are not checked
+├─ Precondition: <a href="mailto:test@example.com">Email</a>
+├─ Steps:
+│   1. Add mailto link
+│   2. Run validator.py
+├─ Expected Result: No error for mailto links
+├─ Status: PASS/FAIL
+
+
+TEST CASE 6.6: Multiple Broken Links
+├─ Test ID: TC-LINK-006
+├─ Description: Detect multiple broken links
+├─ Precondition: HTML contains 3+ broken links
+├─ Steps:
+│   1. Add multiple broken links
+│   2. Run validator.py
+│   3. Check error count
+├─ Expected Result: Multiple errors for each broken link
+├─ Status: PASS/FAIL
+
+
+TEST CASE 6.7: Link with Path
+├─ Test ID: TC-LINK-007
+├─ Description: Validate links with directory paths
+├─ Precondition: <a href="pages/about.html">Link</a>
+├─ Steps:
+│   1. Add link with path
+│   2. Ensure file exists at path
+│   3. Run validator.py
+├─ Expected Result: No error if file exists
+├─ Status: PASS/FAIL
+
+
+TEST CASE 6.8: Relative Path Links
+├─ Test ID: TC-LINK-008
+├─ Description: Validate relative path links
+├─ Precondition: <a href="../index.html">Link</a>
+├─ Steps:
+│   1. Add relative path link
+│   2. Ensure path is valid
+│   3. Run validator.py
+├─ Expected Result: No error if relative path valid
+├─ Status: PASS/FAIL
+
+
+================================================================================
+                    CATEGORY 7: ERROR LOGGING
+================================================================================
+
+TEST CASE 7.1: Error Log Creation
+├─ Test ID: TC-LOG-001
+├─ Description: Verify error log is created on validation failure
+├─ Precondition: Validation has errors
+├─ Steps:
+│   1. Run validator with missing file
+│   2. Check if logs/failure.log created
+├─ Expected Result: logs/failure.log exists with errors
+├─ Status: PASS/FAIL
+
+
+TEST CASE 7.2: Error Log Format
+├─ Test ID: TC-LOG-002
+├─ Description: Verify error log format
+├─ Precondition: Validation has errors
+├─ Steps:
+│   1. Run validator with multiple errors
+│   2. Check log file format
+├─ Expected Result: Contains "WEBSITE VALIDATION FAILED" header
+├─ Status: PASS/FAIL
+
+
+TEST CASE 7.3: Console Error Output
+├─ Test ID: TC-LOG-003
+├─ Description: Verify errors are printed to console
+├─ Precondition: Validation has errors
+├─ Steps:
+│   1. Run validator
+│   2. Capture console output
+├─ Expected Result: Errors displayed on console
+├─ Status: PASS/FAIL
+
+
+TEST CASE 7.4: Exception on Validation Failure
+├─ Test ID: TC-LOG-004
+├─ Description: Verify exception is raised on failure
+├─ Precondition: Validation has errors
+├─ Steps:
+│   1. Run validator
+│   2. Check if exception raised
+├─ Expected Result: Exception: "Website Validation Failed"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 7.5: Error Log Overwrite
+├─ Test ID: TC-LOG-005
+├─ Description: Verify error log is overwritten on each run
+├─ Precondition: Run validator twice with different errors
+├─ Steps:
+│   1. Run validator first time
+│   2. Modify HTML and run validator again
+│   3. Check log file
+├─ Expected Result: Log contains only latest errors
+├─ Status: PASS/FAIL
+
+
+================================================================================
+                    CATEGORY 8: SUCCESS LOGGING
+================================================================================
+
+TEST CASE 8.1: Success Log Creation
+├─ Test ID: TC-LOG-006
+├─ Description: Verify success log is created on validation pass
+├─ Precondition: All validation checks pass
+├─ Steps:
+│   1. Run validator with all files valid
+│   2. Check if logs/success.log created
+├─ Expected Result: logs/success.log exists
+├─ Status: PASS/FAIL
+
+
+TEST CASE 8.2: Success Log Content
+├─ Test ID: TC-LOG-007
+├─ Description: Verify success log contains success message
+├─ Precondition: All validation checks pass
+├─ Steps:
+│   1. Run validator successfully
+│   2. Read success.log
+├─ Expected Result: Contains "Website Validation Successful"
+├─ Status: PASS/FAIL
+
+
+TEST CASE 8.3: Console Success Output
+├─ Test ID: TC-LOG-008
+├─ Description: Verify success message printed to console
+├─ Precondition: All validation checks pass
+├─ Steps:
+│   1. Run validator successfully
+│   2. Capture console output
+├─ Expected Result: "Website Validation Successful" printed
+├─ Status: PASS/FAIL
+
+
+TEST CASE 8.4: No Exception on Success
+├─ Test ID: TC-LOG-009
+├─ Description: Verify no exception raised on successful validation
+├─ Precondition: All validation checks pass
+├─ Steps:
+│   1. Run validator
+│   2. Check if exception is NOT raised
+├─ Expected Result: No exception, graceful exit
+├─ Status: PASS/FAIL
+
+
+================================================================================
+                      CATEGORY 9: EDGE CASES
+================================================================================
+
+TEST CASE 9.1: HTML with Special Characters
+├─ Test ID: TC-EDGE-001
+├─ Description: Validate HTML with special characters
+├─ Precondition: HTML contains UTF-8 special chars
+├─ Steps:
+│   1. Add special characters to HTML
+│   2. Run validator.py
+├─ Expected Result: No encoding errors
+├─ Status: PASS/FAIL
+
+
+TEST CASE 9.2: Very Long File Paths
+├─ Test ID: TC-EDGE-002
+├─ Description: Handle very long file paths
+├─ Precondition: File path > 260 characters (Windows limit)
+├─ Steps:
+│   1. Create deeply nested directory structure
+│   2. Reference file from nested path
+│   3. Run validator.py
+├─ Expected Result: Proper error handling
+├─ Status: PASS/FAIL
+
+
+TEST CASE 9.3: Large HTML File
+├─ Test ID: TC-EDGE-003
+├─ Description: Validate large HTML files (>10MB)
+├─ Precondition: Very large HTML file
+├─ Steps:
+│   1. Create large HTML with many elements
+│   2. Run validator.py
+├─ Expected Result: Successful validation with no timeout
+├─ Status: PASS/FAIL
+
+
+TEST CASE 9.4: Empty HTML File
+├─ Test ID: TC-EDGE-004
+├─ Description: Handle empty HTML file
+├─ Precondition: Empty HTML file exists
+├─ Steps:
+│   1. Create empty HTML file
+│   2. Run validator.py
+├─ Expected Result: No parsing errors
+├─ Status: PASS/FAIL
+
+
+TEST CASE 9.5: Malformed HTML
+├─ Test ID: TC-EDGE-005
+├─ Description: Handle malformed HTML gracefully
+├─ Precondition: HTML with syntax errors
+├─ Steps:
+│   1. Create HTML with missing closing tags
+│   2. Run validator.py
+├─ Expected Result: BeautifulSoup parses and continues
+├─ Status: PASS/FAIL
+
+
+TEST CASE 9.6: Case Sensitivity in File Names
+├─ Test ID: TC-EDGE-006
+├─ Description: Handle case sensitivity in filenames
+├─ Precondition: Reference "Image.JPG" but file is "image.jpg"
+├─ Steps:
+│   1. Create file with lowercase name
+│   2. Reference with uppercase
+│   3. Run validator.py
+├─ Expected Result: Behavior depends on OS
+├─ Status: PASS/FAIL
+
+
+TEST CASE 9.7: Files with Spaces in Names
+├─ Test ID: TC-EDGE-007
+├─ Description: Handle filenames with spaces
+├─ Precondition: File named "my image.jpg"
+├─ Steps:
+│   1. Create file with spaces
+│   2. Reference in HTML
+│   3. Run validator.py
+├─ Expected Result: No validation errors if exists
+├─ Status: PASS/FAIL
+
+
+TEST CASE 9.8: Symbolic Links
+├─ Test ID: TC-EDGE-008
+├─ Description: Handle symbolic links
+├─ Precondition: Reference is symlink to actual file
+├─ Steps:
+│   1. Create symlink to file
+│   2. Reference symlink in HTML
+│   3. Run validator.py
+├─ Expected Result: Symlink is resolved and validated
+├─ Status: PASS/FAIL
+
+
+================================================================================
+                    CATEGORY 10: INTEGRATION TESTS
+================================================================================
+
+TEST CASE 10.1: Complete Validation Workflow
+├─ Test ID: TC-INT-001
+├─ Description: Full validation workflow with mixed errors
+├─ Precondition: HTML with multiple types of errors
+├─ Steps:
+│   1. Create HTML with missing images, CSS, broken links
+│   2. Run validator.py
+│   3. Verify all error types detected
+├─ Expected Result: All errors logged in single report
+├─ Status: PASS/FAIL
+
+
+TEST CASE 10.2: Validator After Deployment
+├─ Test ID: TC-INT-002
+├─ Description: Run validator after file deployment
+├─ Precondition: Files deployed from staging to production
+├─ Steps:
+│   1. Simulate deployment (copy files)
+│   2. Run validator.py
+│   3. Verify all links valid
+├─ Expected Result: Validation passes after deployment
+├─ Status: PASS/FAIL
+
+
+TEST CASE 10.3: Concurrent Validation Runs
+├─ Test ID: TC-INT-003
+├─ Description: Run validator concurrently
+├─ Precondition: Multiple validator instances
+├─ Steps:
+│   1. Run validator in parallel processes
+│   2. Monitor for conflicts
+├─ Expected Result: No file locking conflicts
+├─ Status: PASS/FAIL
+
+
+TEST CASE 10.4: Validation with CI/CD Pipeline
+├─ Test ID: TC-INT-004
+├─ Description: Run validator in Jenkins pipeline
+├─ Precondition: Jenkins job configured with validator
+├─ Steps:
+│   1. Trigger Jenkins build
+│   2. Verify validator runs
+│   3. Check build result
+├─ Expected Result: Pipeline succeeds/fails based on validation
+├─ Status: PASS/FAIL
+
+
+TEST CASE 10.5: Validator Performance
+├─ Test ID: TC-INT-005
+├─ Description: Measure validator execution time
+├─ Precondition: Project with 100+ images, links, files
+├─ Steps:
+│   1. Time validator execution
+│   2. Record metrics
+├─ Expected Result: Completes in < 30 seconds
+├─ Status: PASS/FAIL
+
+
+================================================================================
+                         TEST EXECUTION SUMMARY
+================================================================================
+
+Total Test Cases: 54
+Categories: 10
+├─ Required Files: 6 tests
+├─ Required Folders: 3 tests
+├─ Image Validation: 8 tests
+├─ CSS Validation: 6 tests
+├─ JavaScript Validation: 6 tests
+├─ Hyperlink Validation: 8 tests
+├─ Error Logging: 5 tests
+├─ Success Logging: 4 tests
+├─ Edge Cases: 8 tests
+└─ Integration Tests: 5 tests
+
+Execution Environment: Windows/Linux/macOS
+Tools Required:
+  - Python 3.8+
+  - BeautifulSoup4
+  - pytest (optional)
+
+Pass Criteria: 100% of test cases PASS
+
+Notes:
+  - All file paths should be relative to project root
+  - Test data should be in sample_data/ directory
+  - Use temporary directories for destructive tests
+  - Clean up test files after execution
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================
+
+Document Version: 1.0
+Last Updated: June 8, 2026
+Created For: RCA Bot Validator Module Testing
+Status: Ready for Implementation
