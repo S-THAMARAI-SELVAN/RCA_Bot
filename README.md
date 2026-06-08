@@ -4,7 +4,7 @@
 [![Jenkins](https://img.shields.io/badge/Jenkins-CI/CD-red?logo=jenkins)](https://www.jenkins.io/)
 [![SQLite](https://img.shields.io/badge/Database-SQLite-green)]()
 [![Ollama](https://img.shields.io/badge/AI-Ollama-orange)]()
-[![License](https://img.shields.io/badge/License-MIT-brightgreen)]()
+
 
 ---
 
