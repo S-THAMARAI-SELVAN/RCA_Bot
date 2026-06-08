@@ -4,7 +4,7 @@ Build Number: #2847
 Job Name: Website-Deployment-Pipeline
 Status: FAILED
 
-===== ERROR DETAILS =====
+====== ERROR DETAILS ======
 
 Stage: Deploy
 Error Type: DatabaseConnectionError
