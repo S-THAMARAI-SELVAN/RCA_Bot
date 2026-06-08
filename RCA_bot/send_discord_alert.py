@@ -3,7 +3,7 @@ import requests
 import os
 import sys
 
-# Force UTF-8 output (extra safety)
+## Force UTF-8 output (extra safety)
 try:
     sys.stdout.reconfigure(encoding="utf-8")
 except Exception:

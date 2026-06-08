@@ -284,5 +284,5 @@ print("Report Stored In SQLite")
 print("\n===== RCA REPORT =====\n")
 
 print(report)
-
+print("\n======================\n")
 print("\n======================\n")
