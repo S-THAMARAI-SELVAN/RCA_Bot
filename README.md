@@ -29,7 +29,7 @@ Team 28
 
 - **SURUTHIKASA S** – [Resume](https://drive.google.com/file/d/1lWouQ4UMoqCafnzaFKIweKdOhxNVz30d/view?usp=sharing)
 
-- **SUSHANT KUMAR MISHRA** – [Resume](https://drive.google.com/drive/folders/1GaT8pYHm4jBXvPsE2bQZ73q8_OKH-zbZ)
+- **SUSHANT KUMAR MISHRA** – [Resume](https://drive.google.com/file/d/1KAytYu9tu9Hap0EInsHAoi8KeuP3ubFz/view?usp=sharing)
 
 ## Deliverable Links
 
