@@ -298,7 +298,7 @@ Recent Git commit modified deployment configuration
 without updating environment variables.
 
 Impact:
-Production deployment blocked.
+Production deployment blocked while pipeline failures.
 
 Recommendations:
 1. Update environment configuration.
